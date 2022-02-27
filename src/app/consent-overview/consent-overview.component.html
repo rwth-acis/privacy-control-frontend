@@ -1,0 +1,23 @@
+<h1>Overview of Services</h1>
+<p>Here you can take a look at all the courses you are participating in and their services:</p>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Service</th>
+    <th scope="col">Internal</th>
+    <th scope="col">Description</th>
+  </tr>
+  </thead>
+  <tbody>
+  <ng-container *ngFor="let service of services; index as i">
+    <tr *ngFor="let internal of service.internals; index as g">
+      <th scope="row">{{ i + 1 }}</th>
+      <td *ngIf="g==0" [attr.rowspan]="service.internals.length" >{{ service.name }}</td>
+      <td><a [routerLink]="['/consent-course',service.id,internal.id]">{{internal.name}}</a></td>
+      <td>{{internal.id}}</td>
+    </tr>
+  </ng-container>
+  </tbody>
+</table>

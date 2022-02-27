@@ -1,0 +1,25 @@
+<h1>Course Name</h1>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc leo lacus, fringilla eget tellus in, rutrum facilisis justo. Donec elementum enim sit amet lectus euismod, sed consectetur nibh vulputate. Aenean pellentesque, lorem id mattis volutpat, felis odio pretium neque, vel lobortis tortor purus vel nunc. Morbi eget leo a urna semper aliquet non a arcu.</p>
+
+<ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+  <ng-container *ngFor="let purpose of purposes">
+    <ngb-panel>
+      <ng-template ngbPanelTitle>
+        <span>
+          <b>{{purpose.name}}</b>
+          <span class="pull-right">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+            </div>
+          </span>
+        </span>
+      </ng-template>
+      <ng-template ngbPanelContent>
+        {{purpose.description}}
+      </ng-template>
+    </ngb-panel>
+  </ng-container>
+</ngb-accordion>
+
+
+
