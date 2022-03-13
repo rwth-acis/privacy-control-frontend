@@ -15,7 +15,7 @@
     <tr *ngFor="let internal of service.internals; index as g">
       <th scope="row">{{ i + 1 }}</th>
       <td *ngIf="g==0" [attr.rowspan]="service.internals.length" >{{ service.name }}</td>
-      <td><a [routerLink]="['/consent-course',service.id,internal.id]">{{internal.name}}</a></td>
+      <td><a [routerLink]="['/consent',service.id,internal.id]">{{internal.name}}</a></td>
       <td>{{internal.id}}</td>
     </tr>
   </ng-container>

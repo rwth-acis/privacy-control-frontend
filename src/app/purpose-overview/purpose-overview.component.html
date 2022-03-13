@@ -1,6 +1,8 @@
 <div>
   <h1>Data Processing Purposes
-    <span class="float-end"><button type="button" class="btn btn-success">Create</button></span>
+    <span class="float-end">
+      <a routerLink="/purposes/create" type="button" class="btn btn-success" >Create</a>
+    </span>
   </h1>
 </div>
 <p>
@@ -19,13 +21,16 @@
   <div class="card" style="width: 60rem;">
     <div class="card-header">
       <h3>
-        {{purpose.title}}
-        <span class="float-end"><button type="button" class="btn btn-primary">Edit</button></span>
+        [{{purpose.id}}] {{purpose.title}}
+        <span class="float-end">
+          <a [routerLink]="['/purposes',purpose.id]" type="button" class="btn btn-primary">Edit</a>
+        </span>
       </h3>
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">{{purpose.description}}</li>
     </ul>
   </div>
+  <br/>
 </ng-container>
 

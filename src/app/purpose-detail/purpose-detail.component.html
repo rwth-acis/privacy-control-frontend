@@ -1,0 +1,35 @@
+<ng-container *ngIf="purposeForm && purpose">
+  <form [formGroup]="purposeForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-3">
+        <label for="id" class="form-label">Purpose ID</label>
+        <input type="text" class="form-control" id="id" formControlName="id" [(ngModel)]="purpose.id">
+        <div *ngIf="id?.touched && id?.invalid" class="alert alert-danger">
+          <div *ngIf="id?.errors?.['required']">ID is required.</div>
+          <div *ngIf="id?.errors?.['pattern']">ID must be a number.</div>
+        </div>
+      </div>
+      <div class="col-9">
+        <label for="title" class="form-label">Purpose Title</label>
+        <input type="text" class="form-control" id="title" formControlName="title" [(ngModel)]="purpose.title" required>
+        <div *ngIf="title?.touched && title?.invalid" class="alert alert-danger">
+          <div *ngIf="title?.errors?.['required']">Title is required.</div>
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Purpose Description</label>
+      <textarea class="form-control" id="description" rows="3" formControlName="description"
+                [(ngModel)]="purpose.description" required></textarea>
+      <div *ngIf="description?.touched && description?.invalid" class="alert alert-danger">
+        <div *ngIf="description?.errors?.['required']">Description is required.</div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <a routerLink="/purposes" type="button" class="btn btn-secondary">Cancel</a>
+      <span class="float-end">
+    <button type="submit" class="btn btn-primary" [disabled]="purposeForm.pristine">Save</button>
+  </span>
+    </div>
+  </form>
+</ng-container>

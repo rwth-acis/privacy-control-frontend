@@ -10,6 +10,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ConsentCourseComponent} from './consent-course/consent-course.component';
 import {WelcomeScreenComponent} from './welcome-screen/welcome-screen.component';
 import {PurposeOverviewComponent} from './purpose-overview/purpose-overview.component';
+import { PurposeDetailComponent } from './purpose-detail/purpose-detail.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import { PurposeCreateComponent } from './purpose-create/purpose-create.component';
 
 @NgModule({
   declarations: [
@@ -19,17 +22,22 @@ import {PurposeOverviewComponent} from './purpose-overview/purpose-overview.comp
     ConsentCourseComponent,
     WelcomeScreenComponent,
     PurposeOverviewComponent,
+    PurposeDetailComponent,
+    PurposeCreateComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot([
       {path: '', component: WelcomeScreenComponent},
-      {path: 'consent-overview', component: ConsentOverviewComponent},
-      {path: 'consent-course/:serviceID/:courseID', component: ConsentCourseComponent},
-      {path: 'purpose-overview', component: PurposeOverviewComponent}
+      {path: 'consent', component: ConsentOverviewComponent},
+      {path: 'consent/:serviceID/:courseID', component: ConsentCourseComponent},
+      {path: 'purposes', component: PurposeOverviewComponent},
+      {path: 'purposes/create', component: PurposeCreateComponent},
+      {path: 'purposes/:purposeID', component: PurposeDetailComponent},
     ]),
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
