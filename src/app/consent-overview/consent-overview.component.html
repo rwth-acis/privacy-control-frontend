@@ -6,18 +6,20 @@
   <tr>
     <th scope="col">#</th>
     <th scope="col">Service</th>
-    <th scope="col">Internal</th>
+    <th scope="col">Course</th>
     <th scope="col">Description</th>
   </tr>
   </thead>
   <tbody>
-  <ng-container *ngFor="let service of services; index as i">
-    <tr *ngFor="let internal of service.internals; index as g">
-      <th scope="row">{{ i + 1 }}</th>
-      <td *ngIf="g==0" [attr.rowspan]="service.internals.length" >{{ service.name }}</td>
-      <td><a [routerLink]="['/consent',service.id,internal.id]">{{internal.name}}</a></td>
-      <td>{{internal.id}}</td>
-    </tr>
+  <ng-container *ngIf="services">
+    <ng-container *ngFor="let service of services; index as i">
+      <tr *ngFor="let course of service.courses; index as g">
+        <th scope="row">{{ i + 1 }}</th>
+        <td *ngIf="g==0" [attr.rowspan]="service.courses.length">{{ service.name }}</td>
+        <td><a [routerLink]="['/consent',service.id,course.id]">{{course.name}}</a></td>
+        <td>{{course.id}}</td>
+      </tr>
+    </ng-container>
   </ng-container>
   </tbody>
 </table>

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Purpose} from "../purpose";
+import {Purpose} from "../model";
 import {environment} from "../../environments/environment";
 
 

@@ -1,54 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Service} from "../model";
+import {environment} from "../../environments/environment";
 
-interface Service {
-  name: string;
-  id: string;
-  internals: Internal[];
-}
-
-interface Internal {
-  name: string;
-  id: string;
-}
-
-const SERVICES: Service[] = [
-  {
-    name: 'Maths Proxy',
-    id: 'Maths@Proxy1',
-    internals: [
-      {
-        name: 'Calculus',
-        id: '1',
-      },
-      {
-        name: 'Algebra',
-        id: '2'
-      },
-      {
-        name: 'Geometry',
-        id: '3',
-      }
-    ]
-  },
-  {
-    name: 'Maths Proxy',
-    id: 'Maths@Proxy1',
-    internals: [
-      {
-        name: 'Calculus',
-        id: '1',
-      },
-      {
-        name: 'Algebra',
-        id: '2'
-      },
-      {
-        name: 'Geometry',
-        id: '3',
-      }
-    ]
-  }
-];
 
 @Component({
   selector: 'app-consent-overview',
@@ -56,11 +10,18 @@ const SERVICES: Service[] = [
   styleUrls: ['./consent-overview.component.css']
 })
 export class ConsentOverviewComponent implements OnInit {
-  services = SERVICES;
+  services: Service[] | undefined;
 
-  constructor() { }
+  constructor(
+    private http: HttpClient,
+  ) {
+  }
 
   ngOnInit(): void {
+    // TODO: Replace with logged-in user.
+    this.http.get<Service[]>(environment.urlConsentOverview + "student1").subscribe(data => {
+      this.services = data;
+    })
   }
 
 }

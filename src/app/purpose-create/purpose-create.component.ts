@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
-import {ActivatedRoute} from "@angular/router";
-import {Purpose} from "../purpose";
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Purpose} from "../model";
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {environment} from "../../environments/environment";
 
 @Component({
@@ -15,7 +15,8 @@ export class PurposeCreateComponent implements OnInit {
   purposeForm: FormGroup;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) {
     this.purpose = {
       id: -1,
@@ -24,14 +25,11 @@ export class PurposeCreateComponent implements OnInit {
       version: 0
     };
     this.purposeForm = new FormGroup({
-      id: new FormControl( null, [Validators.required, Validators.pattern("^[0-9]*$")]),
-      title: new FormControl(null,[Validators.required]),
+      id: new FormControl(null, [Validators.required, Validators.pattern("^[0-9]*$")]),
+      title: new FormControl(null, [Validators.required]),
       description: new FormControl(null, [Validators.required]),
     });
     this.purposeForm.markAsPristine();
-  }
-
-  ngOnInit(): void {
   }
 
   get id() {
@@ -44,6 +42,9 @@ export class PurposeCreateComponent implements OnInit {
 
   get description() {
     return this.purposeForm.get('description');
+  }
+
+  ngOnInit(): void {
   }
 
   onSubmit() {
@@ -63,6 +64,7 @@ export class PurposeCreateComponent implements OnInit {
           }
         })
 
+        this.router.navigate(['purposes']);
       }
     }
   }

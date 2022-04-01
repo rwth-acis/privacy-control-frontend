@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {ActivatedRoute} from "@angular/router";
-import {Purpose} from "../purpose";
+import {ActivatedRoute, Router} from "@angular/router";
+import {Purpose} from "../model";
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {environment} from "../../environments/environment";
 
@@ -17,8 +17,21 @@ export class PurposeDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
+    private router: Router,
   ) {
 
+  }
+
+  get id() {
+    return this.purposeForm?.get('id');
+  }
+
+  get title() {
+    return this.purposeForm?.get('title');
+  }
+
+  get description() {
+    return this.purposeForm?.get('description');
   }
 
   ngOnInit(): void {
@@ -36,18 +49,6 @@ export class PurposeDetailComponent implements OnInit {
     });
 
     this.purposeForm.controls['id'].disable();
-  }
-
-  get id() {
-    return this.purposeForm?.get('id');
-  }
-
-  get title() {
-    return this.purposeForm?.get('title');
-  }
-
-  get description() {
-    return this.purposeForm?.get('description');
   }
 
   onSubmit() {
@@ -69,6 +70,7 @@ export class PurposeDetailComponent implements OnInit {
               console.error('Error submitting purpose form.', error);
             }
           })
+          this.router.navigate(['purposes']);
         }
       }
     }
