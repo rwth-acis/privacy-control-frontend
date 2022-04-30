@@ -5,23 +5,43 @@
   <thead>
   <tr>
     <th scope="col">Service</th>
-    <th scope="col">Course ID</th>
-    <th scope="col">Course Name</th>
+    <th scope="col">Course</th>
+    <th scope="col">Course Actions</th>
   </tr>
   </thead>
   <tbody>
   <ng-container *ngIf="services">
     <ng-container *ngFor="let service of services; index as i">
-      <tr *ngFor="let course of service.courses; index as g">
-        <td *ngIf="g==0" [attr.rowspan]="service.courses.length">{{ service.name }}</td>
-        <td>{{course.id}}</td>
-        <td><a [routerLink]="['/consent',service.id,course.id]">{{course.name}}</a></td>
-        <td *ngIf="g==0" [attr.rowspan]="service.courses.length" class="align-middle text-center">
-          <a [routerLink]="['/service',service.id,'course','create']" class="btn btn-success" type="button">Add
-            Course</a>
-        </td>
-      </tr>
-
+      <div *ngIf="service.courses.length > 0; then thenBlock else elseBlock"></div>
+      <ng-template #thenBlock>
+        <tr *ngFor="let course of service.courses; index as g">
+          <td *ngIf="g==0" [attr.rowspan]="service.courses.length">
+            {{ service.name }} [{{ service.id}}]
+          </td>
+          <td>[{{course.id}}] {{course.name}}</td>
+          <td>
+            <div class="d-flex justify-content-around">
+              <a [routerLink]="['/service',service.id,'course',course.id]" class="btn btn-primary" type="button">Edit</a>
+              <a [routerLink]="" class="btn btn-info" type="button">Students</a>
+              <a [routerLink]="['/consent',service.id,course.id]" class="btn btn-dark" type="button">Privacy policy</a>
+            </div>
+          </td>
+          <td *ngIf="g==0" [attr.rowspan]="service.courses.length" class="align-middle text-center">
+            <a [routerLink]="['/service',service.id,'course','create']" class="btn btn-success" type="button">Add Course</a>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template #elseBlock>
+        <tr>
+          <td>{{ service.name }} [{{ service.id}}]</td>
+          <td>N/A</td>
+          <td></td>
+          <td  class="align-middle text-center">
+            <a [routerLink]="['/service',service.id,'course','create']" class="btn btn-success" type="button">Add
+              Course</a>
+          </td>
+        </tr>
+      </ng-template>
     </ng-container>
   </ng-container>
   </tbody>

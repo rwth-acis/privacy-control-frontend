@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   urlPurposeList: "http://localhost:8080/pieces/purpose-list/",
   urlConsentOverview: "http://localhost:8080/pieces/consent/",
-  urlManagerOverview: "http://localhost:8080/pieces/manager/"
+  urlManagerOverview: "http://localhost:8080/pieces/manager/",
+  urlCourseCreate: "http://localhost:8080/pieces/register/course",
 };
 
 /*

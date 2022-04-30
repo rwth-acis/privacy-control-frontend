@@ -16,6 +16,7 @@ import {PurposeCreateComponent} from './purpose-create/purpose-create.component'
 import {ManagerOverviewComponent} from './manager-overview/manager-overview.component';
 import {CourseCreateComponent} from './course-create/course-create.component';
 import { InviteStudentComponent } from './invite-student/invite-student.component';
+import { CourseStudentsComponent } from './course-students/course-students.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { InviteStudentComponent } from './invite-student/invite-student.componen
     ManagerOverviewComponent,
     CourseCreateComponent,
     InviteStudentComponent,
+    CourseStudentsComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +45,7 @@ import { InviteStudentComponent } from './invite-student/invite-student.componen
       {path: 'purposes/:purposeID', component: PurposeDetailComponent},
       {path: 'manager', component: ManagerOverviewComponent},
       {path: 'service/:serviceID/course/create', component: CourseCreateComponent},
+      {path: 'service/:serviceID/course/:courseID', component: CourseCreateComponent},
     ]),
     NgbModule,
     ReactiveFormsModule
