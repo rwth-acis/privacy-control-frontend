@@ -1,0 +1,28 @@
+<h1>Overview of Services</h1>
+<p>Below is a list of services that you are managing:</p>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">Service</th>
+    <th scope="col">Course ID</th>
+    <th scope="col">Course Name</th>
+  </tr>
+  </thead>
+  <tbody>
+  <ng-container *ngIf="services">
+    <ng-container *ngFor="let service of services; index as i">
+      <tr *ngFor="let course of service.courses; index as g">
+        <td *ngIf="g==0" [attr.rowspan]="service.courses.length">{{ service.name }}</td>
+        <td>{{course.id}}</td>
+        <td><a [routerLink]="['/consent',service.id,course.id]">{{course.name}}</a></td>
+        <td *ngIf="g==0" [attr.rowspan]="service.courses.length" class="align-middle text-center">
+          <a [routerLink]="['/service',service.id,'course','create']" class="btn btn-success" type="button">Add
+            Course</a>
+        </td>
+      </tr>
+
+    </ng-container>
+  </ng-container>
+  </tbody>
+</table>

@@ -8,10 +8,21 @@ export interface Purpose {
 export interface Service {
   name: string;
   id: string;
-  courses: Courses[];
+  courses: Course[];
 }
 
-interface Courses {
+interface Course {
   name: string;
   id: string;
 }
+
+export interface Student {
+  email: string;
+  name: string;
+}
+
+export interface Manager {
+  email: string;
+  name: string;
+}
+
