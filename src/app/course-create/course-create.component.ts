@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient} from '@angular/common/http';
 import {environment} from "../../environments/environment";
-import {Purpose} from "../model";
 
 interface Course {
-  id: Number,
-  serviceID: Number,
+  id: String,
+  serviceID: String,
   name: String,
   description?: String,
 }
@@ -23,6 +22,7 @@ export class CourseCreateComponent implements OnInit {
   serviceID!: Number;
   routeCourseID!: Number;
   submitted = false;
+  course!: Course;
 
 
   constructor(
@@ -40,41 +40,73 @@ export class CourseCreateComponent implements OnInit {
     this.routeCourseID = this.route.snapshot.params['courseID'];
     this.isEditMode = !(this.routeCourseID === undefined);
 
-    this.form = this.formBuilder.group({
-      courseID: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
-      courseName: ['', Validators.required],
-      courseDescription: ['']
-    })
-
     if (this.isEditMode) {
-
+      let url = environment.urlRoot + "service/" + this.serviceID + "/course/" + this.routeCourseID;
+      this.http.get<Course>(url).subscribe(data => {
+        this.course = data;
+        this.form = this.formBuilder.group({
+          courseID: [{
+            value: this.routeCourseID,
+            disabled: true
+          }, [Validators.required, Validators.pattern("^[0-9]*$")]],
+          courseName: [this.course.name, Validators.required],
+          courseDescription: [this.course.description]
+        })
+      })
+    } else {
+      this.form = this.formBuilder.group({
+        courseID: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+        courseName: ['', Validators.required],
+        courseDescription: ['']
+      })
     }
   }
 
-  get f() { return this.form.controls; }
+  get f() {
+    return this.form.controls;
+  }
 
   onSubmit() {
     this.submitted = true;
     if (this.form.valid) {
-      if (confirm("Please confirm you wish to register this course.")) {
+      let msgText: string;
+      if (this.isEditMode) {
+        msgText = "Please confirm you wish to edit this course."
+      } else {
+        msgText = "Please confirm you wish to register this course."
+      }
+
+      if (confirm(msgText)) {
         let id = this.form.get('courseID')?.value;
         let name = this.form.get('courseName')?.value;
         let desc = this.form.get('courseDescription')?.value;
-        let newCourse : Course = {
+        let newCourse: Course = {
           id: id,
           name: name,
           description: desc,
-          serviceID: this.serviceID
+          serviceID: this.serviceID.toString()
         }
 
-        this.http.post<Course>(environment.urlCourseCreate, newCourse).subscribe({
-          next: data => {
-            console.log("Success!");
-          },
-          error: error => {
-            console.error('Error submitting course form.', error);
-          }
-        })
+        if (this.isEditMode) {
+          let url = environment.urlRoot + "service/" + this.serviceID + "/course/" + this.routeCourseID;
+          this.http.put<Course>(url, newCourse).subscribe({
+            next: data => {
+              console.log("Success!");
+            },
+            error: error => {
+              console.error('Error submitting course form.', error);
+            }
+          })
+        } else {
+          this.http.post<Course>(environment.urlCourseCreate, newCourse).subscribe({
+            next: data => {
+              console.log("Success!");
+            },
+            error: error => {
+              console.error('Error submitting course form.', error);
+            }
+          })
+        }
       }
     }
   }
