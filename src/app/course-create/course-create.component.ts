@@ -96,7 +96,7 @@ export class CourseCreateComponent implements OnInit {
             error: error => {
               console.error('Error submitting course form.', error);
             }
-          })
+          });
         } else {
           this.http.post<Course>(environment.urlCourseCreate, newCourse).subscribe({
             next: data => {

@@ -9,6 +9,10 @@ export const environment = {
   urlConsentOverview: "http://localhost:8080/pieces/consent/",
   urlManagerOverview: "http://localhost:8080/pieces/manager/",
   urlCourseCreate: "http://localhost:8080/pieces/register/course",
+  urlPurposeInCourseCreate: "http://localhost:8080/pieces/register/purpose-in-course/",
+  urlPurposesInCourseGet: "http://localhost:8080/pieces/purpose-in-course/",
+  urlStudentsInCourseGet: "http://localhost:8080/pieces/student-in-course/",
+  urlStudentsInCourseCreate: "http://localhost:8080/pieces/register/student-in-course/",
 };
 
 /*

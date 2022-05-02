@@ -21,13 +21,16 @@
           <td>[{{course.id}}] {{course.name}}</td>
           <td>
             <div class="d-flex justify-content-around">
-              <a [routerLink]="['/service',service.id,'course',course.id]" class="btn btn-primary" type="button">Edit</a>
-              <a [routerLink]="" class="btn btn-info" type="button">Students</a>
+              <a [routerLink]="['/service',service.id,'course',course.id]" class="btn btn-primary"
+                 type="button">Edit</a>
+              <a [routerLink]="['/service',service.id,'course',course.id,'students']" class="btn btn-info"
+                 type="button">Students</a>
               <a [routerLink]="['/consent',service.id,course.id]" class="btn btn-dark" type="button">Privacy policy</a>
             </div>
           </td>
           <td *ngIf="g==0" [attr.rowspan]="service.courses.length" class="align-middle text-center">
-            <a [routerLink]="['/service',service.id,'course','create']" class="btn btn-success" type="button">Add Course</a>
+            <a [routerLink]="['/service',service.id,'course','create']" class="btn btn-success" type="button">Add
+              Course</a>
           </td>
         </tr>
       </ng-template>
@@ -36,7 +39,7 @@
           <td>{{ service.name }} [{{ service.id}}]</td>
           <td>N/A</td>
           <td></td>
-          <td  class="align-middle text-center">
+          <td class="align-middle text-center">
             <a [routerLink]="['/service',service.id,'course','create']" class="btn btn-success" type="button">Add
               Course</a>
           </td>

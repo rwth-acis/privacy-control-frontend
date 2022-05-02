@@ -19,7 +19,7 @@ export class ConsentOverviewComponent implements OnInit {
 
   ngOnInit(): void {
     // TODO: Replace with logged-in user.
-    this.http.get<Service[]>(environment.urlConsentOverview + "student1").subscribe(data => {
+    this.http.get<Service[]>(environment.urlConsentOverview + "student@test.com").subscribe(data => {
       this.services = data;
     })
   }

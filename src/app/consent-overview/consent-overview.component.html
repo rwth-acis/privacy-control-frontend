@@ -17,7 +17,7 @@
         <th scope="row">{{ i + 1 }}</th>
         <td *ngIf="g==0" [attr.rowspan]="service.courses.length">{{ service.name }}</td>
         <td><a [routerLink]="['/consent',service.id,course.id]">{{course.name}}</a></td>
-        <td>{{course.id}}</td>
+        <td>{{course.description}}</td>
       </tr>
     </ng-container>
   </ng-container>

@@ -14,15 +14,16 @@ export interface Service {
 interface Course {
   name: string;
   id: string;
+  description?: string;
 }
 
 export interface Student {
   email: string;
-  name: string;
+  name?: string;
+  pseudonym?: string;
 }
 
 export interface Manager {
   email: string;
   name: string;
 }
-

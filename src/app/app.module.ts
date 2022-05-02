@@ -15,8 +15,8 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {PurposeCreateComponent} from './purpose-create/purpose-create.component';
 import {ManagerOverviewComponent} from './manager-overview/manager-overview.component';
 import {CourseCreateComponent} from './course-create/course-create.component';
-import { InviteStudentComponent } from './invite-student/invite-student.component';
-import { CourseStudentsComponent } from './course-students/course-students.component';
+import {InviteStudentComponent} from './invite-student/invite-student.component';
+import {CourseStudentsComponent} from './course-students/course-students.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +46,7 @@ import { CourseStudentsComponent } from './course-students/course-students.compo
       {path: 'manager', component: ManagerOverviewComponent},
       {path: 'service/:serviceID/course/create', component: CourseCreateComponent},
       {path: 'service/:serviceID/course/:courseID', component: CourseCreateComponent},
+      {path: 'service/:serviceID/course/:courseID/students', component: InviteStudentComponent},
     ]),
     NgbModule,
     ReactiveFormsModule
