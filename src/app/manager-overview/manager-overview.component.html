@@ -25,7 +25,7 @@
                  type="button">Edit</a>
               <a [routerLink]="['/service',service.id,'course',course.id,'students']" class="btn btn-info"
                  type="button">Students</a>
-              <a [routerLink]="['/consent',service.id,course.id]" class="btn btn-dark" type="button">Privacy policy</a>
+              <a [routerLink]="['/purpose',service.id,course.id]" class="btn btn-dark" type="button">Privacy policy</a>
             </div>
           </td>
           <td *ngIf="g==0" [attr.rowspan]="service.courses.length" class="align-middle text-center">

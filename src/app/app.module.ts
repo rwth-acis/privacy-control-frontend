@@ -17,6 +17,8 @@ import {ManagerOverviewComponent} from './manager-overview/manager-overview.comp
 import {CourseCreateComponent} from './course-create/course-create.component';
 import {InviteStudentComponent} from './invite-student/invite-student.component';
 import {CourseStudentsComponent} from './course-students/course-students.component';
+import {PurposeCourseComponent} from './purpose-course/purpose-course.component';
+import {DpoOverviewComponent} from './dpo-overview/dpo-overview.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import {CourseStudentsComponent} from './course-students/course-students.compone
     CourseCreateComponent,
     InviteStudentComponent,
     CourseStudentsComponent,
+    PurposeCourseComponent,
+    DpoOverviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,10 +47,12 @@ import {CourseStudentsComponent} from './course-students/course-students.compone
       {path: 'purposes', component: PurposeOverviewComponent},
       {path: 'purposes/create', component: PurposeCreateComponent},
       {path: 'purposes/:purposeID', component: PurposeDetailComponent},
+      {path: 'purpose/:serviceID/:courseID', component: PurposeCourseComponent},
       {path: 'manager', component: ManagerOverviewComponent},
       {path: 'service/:serviceID/course/create', component: CourseCreateComponent},
       {path: 'service/:serviceID/course/:courseID', component: CourseCreateComponent},
       {path: 'service/:serviceID/course/:courseID/students', component: InviteStudentComponent},
+      {path: 'dpo', component: DpoOverviewComponent},
     ]),
     NgbModule,
     ReactiveFormsModule

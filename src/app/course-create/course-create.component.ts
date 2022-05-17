@@ -107,6 +107,8 @@ export class CourseCreateComponent implements OnInit {
             }
           })
         }
+
+        this.router.navigate(['/manager']);
       }
     }
   }

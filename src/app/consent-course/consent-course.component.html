@@ -1,8 +1,7 @@
 <h1>Course Name</h1>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc leo lacus, fringilla eget tellus in, rutrum facilisis
-  justo. Donec elementum enim sit amet lectus euismod, sed consectetur nibh vulputate. Aenean pellentesque, lorem id
-  mattis volutpat, felis odio pretium neque, vel lobortis tortor purus vel nunc. Morbi eget leo a urna semper aliquet
-  non a arcu.aaa</p>
+<p>This is the where you can manage your to consent to data processing for the course. Simply switch on those
+  collection purposes that you are comfortable with and then click Save. Afterwards there will be about 10s of delay,
+  after which you should receive a confirmation.</p>
 
 
 <div class="row">
@@ -16,7 +15,14 @@
           <b>{{purpose.title}}
             <span class="pull-right">
               <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="purpose{{purpose.id}}">
+                <ng-container
+                  *ngIf="previouslyConsentedPurposeIDs.includes(purpose.id); then thenBlock else elseBlock"></ng-container>
+                <ng-template #thenBlock>
+                  <input class="form-check-input" type="checkbox" id="purpose{{purpose.id}}" checked>
+                </ng-template>
+                <ng-template #elseBlock>
+                  <input class="form-check-input" type="checkbox" id="purpose{{purpose.id}}">
+                </ng-template>
               </div>
             </span>
           </b>
