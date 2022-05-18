@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {HttpClient} from "@angular/common/http";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {environment} from "../../environments/environment";
-import {Purpose, Student} from "../model";
+import {Student} from "../model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
@@ -26,8 +26,8 @@ export class InviteStudentComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.route.params.subscribe(params => {
-      this.serviceID = +params['serviceID'];
-      this.courseID = +params['courseID'];
+      this.serviceID = params['serviceID'];
+      this.courseID = params['courseID'];
     })
   }
 

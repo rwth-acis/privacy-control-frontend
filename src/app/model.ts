@@ -26,4 +26,5 @@ export interface Student {
 export interface Manager {
   email: string;
   name: string;
+  services: Service[];
 }
