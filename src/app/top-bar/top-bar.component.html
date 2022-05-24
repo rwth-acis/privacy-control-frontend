@@ -13,7 +13,13 @@
         <a class="nav-item nav-link" routerLink="/dpo">DPO Overview</a>
       </div>
       <div class="navbar-nav ms-auto">
-        <a class="nav-item nav-link" href="#">Login</a>
+        <ng-container *ngIf="loggedIn">
+          <p class="nav-item nav-link">Welcome {{username}}!</p>
+        </ng-container>
+        <a type="button" class="nav-item nav-link" (click)="onLoginClick()">
+          <ng-container *ngIf="!loggedIn">Login</ng-container>
+          <ng-container *ngIf="loggedIn">Logout</ng-container>
+        </a>
       </div>
     </div>
   </div>

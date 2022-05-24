@@ -4,6 +4,7 @@ import {environment} from "../../environments/environment";
 import {Manager} from "../model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {OAuthService} from "angular-oauth2-oidc";
 
 enum Status {
   OFFLINE,
@@ -31,7 +32,8 @@ export class DpoOverviewComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private formBuilder: FormBuilder,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    public oauthService: OAuthService
   ) {
   }
 
@@ -58,6 +60,7 @@ export class DpoOverviewComponent implements OnInit {
       name: [''],
       email: ['', [Validators.required, Validators.email]]
     })
+
   }
 
   onInit() {

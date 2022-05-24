@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {OAuthModule} from "angular-oauth2-oidc";
 
 import {AppComponent} from './app.component';
 import {ConsentOverviewComponent} from './consent-overview/consent-overview.component';
@@ -19,6 +20,8 @@ import {InviteStudentComponent} from './invite-student/invite-student.component'
 import {CourseStudentsComponent} from './course-students/course-students.component';
 import {PurposeCourseComponent} from './purpose-course/purpose-course.component';
 import {DpoOverviewComponent} from './dpo-overview/dpo-overview.component';
+import {OidcInterceptor} from "./oidc.interceptor";
+
 
 @NgModule({
   declarations: [
@@ -40,6 +43,7 @@ import {DpoOverviewComponent} from './dpo-overview/dpo-overview.component';
   imports: [
     BrowserModule,
     HttpClientModule,
+    OAuthModule.forRoot(),
     RouterModule.forRoot([
       {path: '', component: WelcomeScreenComponent},
       {path: 'consent', component: ConsentOverviewComponent},
@@ -57,7 +61,9 @@ import {DpoOverviewComponent} from './dpo-overview/dpo-overview.component';
     NgbModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: OidcInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
