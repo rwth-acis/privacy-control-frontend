@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {Purpose} from "../model";
 import {environment} from "../../environments/environment";
+import {OAuthService} from "angular-oauth2-oidc";
 
 interface ConsentResponse {
   userID: String,
@@ -27,7 +28,8 @@ export class ConsentCourseComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private oauth: OAuthService
   ) {
     this.route.params.subscribe(params => {
       this.serviceID = params['serviceID'];
@@ -41,7 +43,10 @@ export class ConsentCourseComponent implements OnInit {
       this.purposes = data;
     })
 
-    url = environment.urlConsentOverview + 'student@test.com' + '/' + this.serviceID + '/' + this.courseID;
+    let claims = this.oauth.getIdentityClaims();
+    // @ts-ignore
+    let userID = claims['email'];
+    url = environment.urlConsentOverview + userID + '/' + this.serviceID + '/' + this.courseID;
     this.http.get<ConsentResponse>(url).subscribe(data => {
       for (let id of data.purposes) {
         this.previouslyConsentedPurposeIDs.push(id);
@@ -60,9 +65,13 @@ export class ConsentCourseComponent implements OnInit {
           purposeIDs.push(purpose.id);
         }
       }
-      //TODO: Replace with login detail
+
+      let claims = this.oauth.getIdentityClaims();
+      // @ts-ignore
+      let userID = claims['email'];
+
       let body = {
-        "studentID": "student@test.com",
+        "studentID": userID,
         "serviceID": this.serviceID.toString(),
         "courseID": this.courseID.toString(),
         "purposes": purposeIDs

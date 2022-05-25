@@ -15,7 +15,7 @@
     <ng-container *ngFor="let service of services; index as i">
       <tr *ngFor="let course of service.courses; index as g">
         <th scope="row">{{ i + 1 }}</th>
-        <td *ngIf="g==0" [attr.rowspan]="service.courses.length">{{ service.name }}</td>
+        <td *ngIf="g==0" [attr.rowspan]="service.courses.length">{{ service.id }}</td>
         <td><a [routerLink]="['/consent',service.id,course.id]">{{course.name}}</a></td>
         <td>{{course.description}}</td>
       </tr>

@@ -6,11 +6,17 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <div class="navbar-nav">
-        <a class="nav-item nav-link" routerLink="/consent">Consent Overview</a>
-        <a class="nav-item nav-link" href="#">Collected Data</a>
-        <a class="nav-item nav-link" routerLink="/purposes">Data Processing Purposes</a>
-        <a class="nav-item nav-link" routerLink="/manager">Manager Overview</a>
-        <a class="nav-item nav-link" routerLink="/dpo">DPO Overview</a>
+        <ng-container *ngIf="isStudent">
+          <a class="nav-item nav-link" routerLink="/consent">Consent Overview</a>
+          <a class="nav-item nav-link" href="#">Collected Data</a>
+        </ng-container>
+        <ng-container *ngIf="isManager">
+          <a class="nav-item nav-link" routerLink="/manager">Manager Overview</a>
+        </ng-container>
+        <ng-container *ngIf="isDPO">
+          <a class="nav-item nav-link" routerLink="/dpo">DPO Overview</a>
+          <a class="nav-item nav-link" routerLink="/purposes">Data Processing Purposes</a>
+        </ng-container>
       </div>
       <div class="navbar-nav ms-auto">
         <ng-container *ngIf="loggedIn">

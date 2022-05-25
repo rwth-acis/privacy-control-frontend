@@ -12,6 +12,7 @@
       <input formControlName="courseID" class="form-control" id="courseID" type="text">
       <div *ngIf="submitted && f['courseID'].errors" class="alert alert-danger">
         <div *ngIf="f['courseID'].errors['required']">ID is required</div>
+        <div *ngIf="f['courseID'].errors['cannotContainSpace']">ID must not contain space.</div>
       </div>
     </div>
     <div class="col-2"></div>

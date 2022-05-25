@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient} from '@angular/common/http';
 import {environment} from "../../environments/environment";
+import {WhitespaceValidator} from "../whitespace.validator";
 
 interface Course {
   id: String,
@@ -19,8 +20,8 @@ interface Course {
 export class CourseCreateComponent implements OnInit {
   isEditMode!: boolean;
   form!: FormGroup;
-  serviceID!: Number;
-  routeCourseID!: Number;
+  serviceID!: string;
+  routeCourseID!: string;
   submitted = false;
   course!: Course;
 
@@ -32,7 +33,7 @@ export class CourseCreateComponent implements OnInit {
     private http: HttpClient
   ) {
     this.route.params.subscribe(params => {
-      this.serviceID = +params['serviceID'];
+      this.serviceID = params['serviceID'];
     });
   }
 
@@ -48,14 +49,14 @@ export class CourseCreateComponent implements OnInit {
           courseID: [{
             value: this.routeCourseID,
             disabled: true
-          }, [Validators.required, Validators.pattern("^[0-9]*$")]],
+          }, [Validators.required, WhitespaceValidator.cannotContainSpace]],
           courseName: [this.course.name, Validators.required],
           courseDescription: [this.course.description]
         })
       })
     } else {
       this.form = this.formBuilder.group({
-        courseID: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+        courseID: ['', [Validators.required, WhitespaceValidator.cannotContainSpace]],
         courseName: ['', Validators.required],
         courseDescription: ['']
       })

@@ -67,6 +67,7 @@ export class DpoOverviewComponent implements OnInit {
     let url = environment.urlInit;
     this.http.post(url, null, {responseType: "text"}).subscribe(data => {
       window.alert(data);
+      window.location.reload();
     })
   }
 

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Service} from "../model";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
+import {OAuthService} from "angular-oauth2-oidc";
 
 @Component({
   selector: 'app-manager-overview',
@@ -13,14 +14,20 @@ export class ManagerOverviewComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
+    private oauthService: OAuthService
   ) {
   }
 
   ngOnInit(): void {
-    // TODO: Replace with logged-in user.
-    this.http.get<Service[]>(environment.urlManagerOverview + "manager@test.com" + "/services").subscribe(data => {
-      this.services = data;
-    })
+    let claims = this.oauthService.getIdentityClaims();
+    if (claims) {
+      // @ts-ignore
+      let userID = claims['email'];
+      this.http.get<Service[]>(environment.urlManagerOverview + userID + "/services")
+        .subscribe(data => {
+          this.services = data;
+        })
+    }
   }
 
 }

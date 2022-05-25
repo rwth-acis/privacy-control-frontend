@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Service} from "../model";
 import {environment} from "../../environments/environment";
+import {OAuthService} from "angular-oauth2-oidc";
 
 
 @Component({
@@ -14,14 +15,19 @@ export class ConsentOverviewComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
+    private oauth: OAuthService
   ) {
   }
 
   ngOnInit(): void {
-    // TODO: Replace with logged-in user.
-    this.http.get<Service[]>(environment.urlConsentOverview + "student@test.com").subscribe(data => {
-      this.services = data;
-    })
+    let claims = this.oauth.getIdentityClaims();
+    if (claims) {
+      // @ts-ignore
+      let email = claims['email'];
+      this.http.get<Service[]>(environment.urlConsentOverview + email).subscribe(data => {
+        this.services = data;
+      })
+    }
   }
 
 }
