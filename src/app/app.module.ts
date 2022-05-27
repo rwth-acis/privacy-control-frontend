@@ -21,6 +21,7 @@ import {CourseStudentsComponent} from './course-students/course-students.compone
 import {PurposeCourseComponent} from './purpose-course/purpose-course.component';
 import {DpoOverviewComponent} from './dpo-overview/dpo-overview.component';
 import {OidcInterceptor} from "./oidc.interceptor";
+import {CollectedDataComponent} from './collected-data/collected-data.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import {OidcInterceptor} from "./oidc.interceptor";
     CourseStudentsComponent,
     PurposeCourseComponent,
     DpoOverviewComponent,
+    CollectedDataComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +50,7 @@ import {OidcInterceptor} from "./oidc.interceptor";
       {path: '', component: WelcomeScreenComponent},
       {path: 'consent', component: ConsentOverviewComponent},
       {path: 'consent/:serviceID/:courseID', component: ConsentCourseComponent},
+      {path: 'collected-data/:serviceID/:courseID', component: CollectedDataComponent},
       {path: 'purposes', component: PurposeOverviewComponent},
       {path: 'purposes/create', component: PurposeCreateComponent},
       {path: 'purposes/:purposeID', component: PurposeDetailComponent},

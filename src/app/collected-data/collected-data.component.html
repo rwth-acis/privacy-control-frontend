@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Collected Data</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nibh nisl, viverra eget turpis id, sollicitudin
+        venenatis lorem. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+        Integer in turpis nec nulla laoreet vestibulum. Donec vestibulum, magna sit amet bibendum bibendum, lorem tellus
+        viverra est, eu sollicitudin lorem mauris vel lectus. Nulla vel ultrices nibh.
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <ng-container *ngIf="entries">
+        <ngb-accordion [closeOthers]="true">
+          <ng-container *ngFor="let entry of entries; index as i">
+            <ngb-panel id="static-{{i}}" title="[{{entry.timestamp}}] {{entry.verb}} {{entry.object}}">
+              <ng-template ngbPanelContent>
+                <pre>{{entry.statement |json}}</pre>
+              </ng-template>
+            </ngb-panel>
+          </ng-container>
+        </ngb-accordion>
+      </ng-container>
+    </div>
+  </div>
+</div>

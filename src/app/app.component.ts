@@ -12,15 +12,12 @@ export class AppComponent {
 
   constructor(private oauthService: OAuthService) {
     this.oauthService.configure(authCodeFlowConfig);
-
     this.oauthService.loadDiscoveryDocumentAndTryLogin({
       onTokenReceived: info => {
         console.log('anything')
         console.log(info.accessToken);
       }
     });
-
-    //this.oauthService.setupAutomaticSilentRefresh();
-
+    this.oauthService.setupAutomaticSilentRefresh();
   }
 }

@@ -7,7 +7,7 @@
     <th scope="col">#</th>
     <th scope="col">Service</th>
     <th scope="col">Course</th>
-    <th scope="col">Description</th>
+    <th scope="col">Collected Data</th>
   </tr>
   </thead>
   <tbody>
@@ -15,9 +15,22 @@
     <ng-container *ngFor="let service of services; index as i">
       <tr *ngFor="let course of service.courses; index as g">
         <th scope="row">{{ i + 1 }}</th>
-        <td *ngIf="g==0" [attr.rowspan]="service.courses.length">{{ service.id }}</td>
-        <td><a [routerLink]="['/consent',service.id,course.id]">{{course.name}}</a></td>
-        <td>{{course.description}}</td>
+        <td *ngIf="g==0" [attr.rowspan]="service.courses.length">
+          {{ service.id }} <br/>
+          {{ service.name }}
+        </td>
+        <td>
+          {{course.name}}
+          <a type="button" class="btn btn-primary" [routerLink]="['/consent',service.id,course.id]">
+            Review Consent
+          </a>
+        </td>
+        <td>
+          40 Statements
+          <a type="button" class="btn btn-primary" [routerLink]="['/collected-data',service.id,course.id]">
+            View
+          </a>
+        </td>
       </tr>
     </ng-container>
   </ng-container>

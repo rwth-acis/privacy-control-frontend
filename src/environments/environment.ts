@@ -9,6 +9,7 @@ export const environment = {
   urlRoles: "http://localhost:8080/pieces/user-roles",
   urlPurposeList: "http://localhost:8080/pieces/purpose-list/",
   urlConsentOverview: "http://localhost:8080/pieces/consent/",
+  urlCollectedData: "http://localhost:8080/pieces/collected-data/",
   urlManagerOverview: "http://localhost:8080/pieces/manager/",
   urlAllManagers: "http://localhost:8080/pieces/managers",
   urlManagerCreate: "http://localhost:8080/pieces/register/manager",
