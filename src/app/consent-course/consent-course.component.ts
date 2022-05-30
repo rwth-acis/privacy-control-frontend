@@ -9,8 +9,8 @@ interface ConsentResponse {
   userID: String,
   serviceID: String,
   courseID: String,
-  purposes: Number[],
-  privacyVersion: Number[],
+  purposeIDs: Number[],
+  purposeVersions: Number[],
   timestamp: Number
 }
 
@@ -48,7 +48,7 @@ export class ConsentCourseComponent implements OnInit {
     let userID = claims['email'];
     url = environment.urlConsentOverview + userID + '/' + this.serviceID + '/' + this.courseID;
     this.http.get<ConsentResponse>(url).subscribe(data => {
-      for (let id of data.purposes) {
+      for (let id of data.purposeIDs) {
         this.previouslyConsentedPurposeIDs.push(id);
       }
     })
