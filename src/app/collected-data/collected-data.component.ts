@@ -31,6 +31,7 @@ export class CollectedDataComponent implements OnInit {
     const serviceID = routeParams.get('serviceID');
     const courseID = routeParams.get('courseID');
 
+    // TODO: Add verified info
     let claims = this.oauth.getIdentityClaims();
     if (claims) {
       // @ts-ignore
