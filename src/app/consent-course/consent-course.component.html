@@ -1,9 +1,20 @@
+<div class="row">
+  <div class="col">
+    <a type="button" class="btn btn-sm btn-secondary" routerLink="/consent">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-left"
+           viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+              d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5zM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5z"/>
+      </svg>
+      Back</a>
+  </div>
+</div>
+<br/>
 <h1>Course Name</h1>
 <p>This is the where you can manage your to consent to data processing for the course. Simply switch on those
   collection purposes that you are comfortable with and then click Save. Afterwards there will be about 10s of delay,
   after which you should receive a confirmation.</p>
-
-
+<br/>
 <div class="row">
   <div class="col-2"></div>
   <div class="col-8">
@@ -11,22 +22,25 @@
       <ng-container *ngFor="let purpose of purposes">
         <ngb-panel>
           <ng-template ngbPanelTitle>
-        <span>
-          <b>{{purpose.title}}
-            <span class="pull-right">
-              <div class="form-check form-switch">
-                <ng-container
-                  *ngIf="previouslyConsentedPurposeIDs.includes(purpose.id); then thenBlock else elseBlock"></ng-container>
-                <ng-template #thenBlock>
-                  <input class="form-check-input" type="checkbox" id="purpose{{purpose.id}}" checked>
-                </ng-template>
-                <ng-template #elseBlock>
-                  <input class="form-check-input" type="checkbox" id="purpose{{purpose.id}}">
-                </ng-template>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col">
+                  <b>{{purpose.title}}</b>
+                </div>
+                <div class="col">
+                  <div class="form-check form-switch float-end">
+                    <ng-container
+                      *ngIf="previouslyConsentedPurposeIDs.includes(purpose.id); then thenBlock else elseBlock"></ng-container>
+                    <ng-template #thenBlock>
+                      <input class="form-check-input" type="checkbox" id="purpose{{purpose.id}}" checked>
+                    </ng-template>
+                    <ng-template #elseBlock>
+                      <input class="form-check-input" type="checkbox" id="purpose{{purpose.id}}">
+                    </ng-template>
+                  </div>
+                </div>
               </div>
-            </span>
-          </b>
-        </span>
+            </div>
           </ng-template>
           <ng-template ngbPanelContent>
             {{purpose.description}}

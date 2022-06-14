@@ -21,6 +21,7 @@ export const environment = {
   urlPurposesInCourseGet: ROOT_URL + "purpose-in-course/",
   urlStudentsInCourseGet: ROOT_URL + "student-in-course/",
   urlStudentsInCourseCreate: ROOT_URL + "register/student-in-course/",
+  urlGetL2PServices: ROOT_URL + "get-l2p-services",
 };
 
 /*

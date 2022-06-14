@@ -178,11 +178,7 @@
       <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..."
              (change)="changeServiceID($event)">
       <datalist id="datalistOptions">
-        <option value="San Francisco">
-        <option value="New York">
-        <option value="Seattle">
-        <option value="Los Angeles">
-        <option value="Chicago">
+        <option *ngFor="let service of addableServices" value="{{service}}">
       </datalist>
     </div>
   </div>

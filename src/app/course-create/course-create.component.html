@@ -1,9 +1,21 @@
-<h1>Course Creation</h1>
-<p>
-  Create a new course by filling in the fields underneath. Take care when
-  giving an ID to the new course, so as not to be the same as an existing one.
-  The name and description you give will help your students identify the course.
-</p>
+<div *ngIf="isEditMode; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock>
+  <h1>Course Editing</h1>
+  <p>
+    Edit the course by filling in the fields underneath.
+    The name and description you give will help your students identify the course.
+  </p>
+</ng-template>
+<ng-template #elseBlock>
+  <h1>Course Creation</h1>
+  <p>
+    Create a new course by filling in the fields underneath. Take care when
+    giving an ID to the new course, so as not to be the same as an existing one.
+    The name and description you give will help your students identify the course.
+  </p>
+</ng-template>
+
+
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="mb-3 row">
     <div class="col-2"></div>
@@ -39,7 +51,11 @@
   </div>
   <div class="mb-3 row">
     <div class="col">
-      <button class="btn btn-primary float-end" type="submit">Create</button>
+      <button class="btn btn-primary float-end" type="submit">
+        <div *ngIf="isEditMode; then thenBlock1 else elseBlock1"></div>
+        <ng-template #thenBlock1>Save</ng-template>
+        <ng-template #elseBlock1>Create</ng-template>
+      </button>
     </div>
   </div>
 </form>

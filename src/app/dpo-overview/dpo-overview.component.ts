@@ -24,6 +24,7 @@ interface InitResponse {
 export class DpoOverviewComponent implements OnInit {
   pcsStatus: Status = Status.OFFLINE;
   managers: Manager[] | undefined;
+  addableServices: string[] | undefined;
   addManagerForm!: FormGroup;
   amfSubmitted = false;
   addServiceManagerID: string | undefined;
@@ -61,6 +62,10 @@ export class DpoOverviewComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]]
     })
 
+    url = environment.urlGetL2PServices;
+    this.http.get<string[]>(url).subscribe(data => {
+      this.addableServices = data;
+    })
   }
 
   onInit() {
