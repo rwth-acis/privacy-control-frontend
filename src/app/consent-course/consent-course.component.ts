@@ -56,7 +56,7 @@ export class ConsentCourseComponent implements OnInit {
 
   onSave() {
     if (confirm("Please confirm that this is your consent. Also note that " +
-      "it might take up to a couple of minutes before your changes have been" +
+      "it might take up to a couple of minutes before your changes have been " +
       "fully saved.")) {
       let purposeIDs: Number[] = [];
       for (let purpose of this.purposes) {

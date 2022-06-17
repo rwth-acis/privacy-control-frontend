@@ -56,8 +56,18 @@
         can also request all of the collected data to be deleted. To do this, simply click the red button on the
         top-right.
       </p>
+      <p>
+        You should also now that all of your data is stored with a pseudonym instead of your personal details. A
+        pseudonym is a randomly generated string that the system uses to identify the data as yours, without revealing
+        your email or name to anyone who shouldn't know. If you click and open any data entry below, you'll see the
+        pseudonym in the "actor" field, which identifies users.
+      </p>
+      <ng-container *ngIf="pseudonym">
+        Your pseudonym for this course is: <span class="border border-dark bg-light mt-2"><b>{{pseudonym.pseudonym}}</b></span>
+      </ng-container>
     </div>
   </div>
+  <br/>
   <div class="row">
     <div class="col">
       <ng-container *ngIf="entries">

@@ -13,6 +13,10 @@ interface Entry {
   verified: boolean,
 }
 
+interface Pseudonym {
+  pseudonym: string
+}
+
 @Component({
   selector: 'app-collected-data',
   templateUrl: './collected-data.component.html',
@@ -20,6 +24,7 @@ interface Entry {
 })
 export class CollectedDataComponent implements OnInit {
   entries: Entry[] | undefined;
+  pseudonym: Pseudonym | undefined;
 
   constructor(
     private http: HttpClient,
@@ -41,6 +46,11 @@ export class CollectedDataComponent implements OnInit {
       let url = environment.urlCollectedData + serviceID + '/' + courseID;
       this.http.get<Entry[]>(url).subscribe(data => {
         this.entries = data;
+      })
+
+      url = environment.urlStudentsInCourseGet + serviceID + '/' + courseID + '/pseudonym';
+      this.http.get<Pseudonym>(url).subscribe(data => {
+        this.pseudonym = data;
       })
     }
   }
