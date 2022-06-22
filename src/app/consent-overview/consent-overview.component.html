@@ -5,19 +5,46 @@
   <thead>
   <tr>
     <th scope="col">#</th>
-    <th scope="col">Service</th>
-    <th scope="col">Internal</th>
-    <th scope="col">Description</th>
+    <th scope="col">Data Collector</th>
+    <th scope="col">Course</th>
+    <th scope="col"></th>
+    <th scope="col">Collected Data</th>
   </tr>
   </thead>
   <tbody>
-  <ng-container *ngFor="let service of services; index as i">
-    <tr *ngFor="let internal of service.internals; index as g">
-      <th scope="row">{{ i + 1 }}</th>
-      <td *ngIf="g==0" [attr.rowspan]="service.internals.length" >{{ service.name }}</td>
-      <td><a [routerLink]="['/consent-course',service.id,internal.id]">{{internal.name}}</a></td>
-      <td>{{internal.id}}</td>
-    </tr>
+  <ng-container *ngIf="services">
+    <ng-container *ngFor="let service of services; index as i">
+      <tr *ngFor="let course of service.courses; index as g">
+        <th scope="row" class="align-middle">{{ i + 1 }}</th>
+        <td *ngIf="g==0" [attr.rowspan]="service.courses.length" class="align-middle">
+          {{ service.id }} <br/>
+          {{ service.name }}
+        </td>
+        <td class="align-middle">
+          {{course.name}}
+        </td>
+        <td class="align-middle">
+          <a type="button" class="btn btn-dark" [routerLink]="['/consent',service.id,course.id]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-check"
+                 viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                    d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+            </svg>
+            Review Consent
+          </a>
+        </td>
+        <td class="align-middle">
+          <a type="button" class="btn btn-primary" [routerLink]="['/collected-data',service.id,course.id]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-bar-chart-line" viewBox="0 0 16 16">
+              <path
+                d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2zm1 12h2V2h-2v12zm-3 0V7H7v7h2zm-5 0v-3H2v3h2z"/>
+            </svg>
+            View Data
+          </a>
+        </td>
+      </tr>
+    </ng-container>
   </ng-container>
   </tbody>
 </table>

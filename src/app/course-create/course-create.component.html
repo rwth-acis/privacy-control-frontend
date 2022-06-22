@@ -1,0 +1,62 @@
+<div *ngIf="isEditMode; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock>
+  <h1>Course Editing</h1>
+  <p>
+    Edit the course by filling in the fields underneath.
+    The name and description you give will help your students identify the course.
+  </p>
+</ng-template>
+<ng-template #elseBlock>
+  <h1>Course Creation</h1>
+  <p>
+    Create a new course by filling in the fields underneath. Take care when
+    giving an ID to the new course, so as not to be the same as an existing one.
+    The name and description you give will help your students identify the course.
+  </p>
+</ng-template>
+
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="mb-3 row">
+    <div class="col-2"></div>
+    <label class="col-1 col-form-label" for="courseID">ID:</label>
+    <div class="col-7">
+      <input formControlName="courseID" class="form-control" id="courseID" type="text">
+      <div *ngIf="submitted && f['courseID'].errors" class="alert alert-danger">
+        <div *ngIf="f['courseID'].errors['required']">ID is required</div>
+        <div *ngIf="f['courseID'].errors['cannotContainSpace']">ID must not contain space.</div>
+      </div>
+    </div>
+    <div class="col-2"></div>
+  </div>
+  <div class="mb-3 row">
+    <div class="col-2"></div>
+    <label class="col-1 col-form-label" for="courseName">Name:</label>
+    <div class="col-7">
+      <input formControlName="courseName" class="form-control" id="courseName" type="text">
+      <div *ngIf="submitted && f['courseName'].errors" class="alert alert-danger">
+        <div *ngIf="f['courseName'].errors['required']">Name is required</div>
+      </div>
+    </div>
+    <div class="col-2"></div>
+  </div>
+  <div class="mb-3 row">
+    <div class="col-2"></div>
+    <label class="col-1 col-form-label" for="courseDescription">Description:</label>
+    <div class="col-7">
+      <textarea formControlName="courseDescription" class="form-control" id="courseDescription"
+                type="text-area"></textarea>
+    </div>
+    <div class="col-2"></div>
+  </div>
+  <div class="mb-3 row">
+    <div class="col">
+      <button class="btn btn-primary float-end" type="submit">
+        <div *ngIf="isEditMode; then thenBlock1 else elseBlock1"></div>
+        <ng-template #thenBlock1>Save</ng-template>
+        <ng-template #elseBlock1>Create</ng-template>
+      </button>
+    </div>
+  </div>
+</form>
+

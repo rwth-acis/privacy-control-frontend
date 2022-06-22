@@ -1,25 +1,85 @@
+<div class="row">
+  <div class="col">
+    <a type="button" class="btn btn-sm btn-secondary" routerLink="/consent">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-left"
+           viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+              d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5zM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5z"/>
+      </svg>
+      Back</a>
+  </div>
+</div>
+<br/>
 <h1>Course Name</h1>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc leo lacus, fringilla eget tellus in, rutrum facilisis justo. Donec elementum enim sit amet lectus euismod, sed consectetur nibh vulputate. Aenean pellentesque, lorem id mattis volutpat, felis odio pretium neque, vel lobortis tortor purus vel nunc. Morbi eget leo a urna semper aliquet non a arcu.</p>
-
-<ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
-  <ng-container *ngFor="let purpose of purposes">
-    <ngb-panel>
-      <ng-template ngbPanelTitle>
-        <span>
-          <b>{{purpose.name}}</b>
-          <span class="pull-right">
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+<p>This is the where you can manage your to consent to data processing for the course. Each one of the below entries is
+  a data collection purpose. They should each specify a concrete and distinct purpose for data processing. Read each one
+  carefully before making the decision to allow them or not. To consent to a purpose, simply click the switch on the
+  right of its header. To save your choices click the Save button below.</p>
+<p>After you click Save, it might take up to a couple of minutes for your changes to take effect.</p>
+<br/>
+<div class="row">
+  <div class="col-2"></div>
+  <div class="col-8">
+    <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+      <ng-container *ngFor="let purpose of purposes">
+        <ngb-panel>
+          <ng-template ngbPanelTitle>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col">
+                  <b>{{purpose.title}}</b>
+                </div>
+                <div class="col">
+                  <div class="form-check form-switch float-end">
+                    <ng-container
+                      *ngIf="previouslyConsentedPurposeIDs.includes(purpose.id); then thenBlock else elseBlock"></ng-container>
+                    <ng-template #thenBlock>
+                      <input class="form-check-input" type="checkbox" id="purpose{{purpose.id}}" checked>
+                    </ng-template>
+                    <ng-template #elseBlock>
+                      <input class="form-check-input" type="checkbox" id="purpose{{purpose.id}}">
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
             </div>
-          </span>
-        </span>
-      </ng-template>
-      <ng-template ngbPanelContent>
-        {{purpose.description}}
-      </ng-template>
-    </ngb-panel>
-  </ng-container>
-</ngb-accordion>
-
-
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <div class="container-fluid">
+              <div class="row">
+                <p>{{purpose.description}}</p>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col">
+                  <p placement="start"
+                     ngbTooltip="This is the revision number that indicates the version of this data collection purpose's text.">
+                    <em>Version: {{purpose.version}}</em>
+                  </p>
+                </div>
+                <div class="col">
+                  <div class="float-end text-success"
+                       placement="end"
+                       ngbTooltip="The text of this data collection purpose is on the blockchain.">
+                    Verified
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                         class="bi bi-cloud-check" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd"
+                            d="M10.354 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                      <path
+                        d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </ngb-panel>
+      </ng-container>
+    </ngb-accordion>
+    <br/>
+    <button class="btn btn-primary float-end" (click)="onSave()">Save</button>
+  </div>
+  <div class="col-2"></div>
+</div>
 

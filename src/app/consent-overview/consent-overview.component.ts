@@ -1,54 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Service} from "../model";
+import {environment} from "../../environments/environment";
+import {OAuthService} from "angular-oauth2-oidc";
 
-interface Service {
-  name: string;
-  id: string;
-  internals: Internal[];
-}
-
-interface Internal {
-  name: string;
-  id: string;
-}
-
-const SERVICES: Service[] = [
-  {
-    name: 'Maths Proxy',
-    id: 'Maths@Proxy1',
-    internals: [
-      {
-        name: 'Calculus',
-        id: '1',
-      },
-      {
-        name: 'Algebra',
-        id: '2'
-      },
-      {
-        name: 'Geometry',
-        id: '3',
-      }
-    ]
-  },
-  {
-    name: 'Maths Proxy',
-    id: 'Maths@Proxy1',
-    internals: [
-      {
-        name: 'Calculus',
-        id: '1',
-      },
-      {
-        name: 'Algebra',
-        id: '2'
-      },
-      {
-        name: 'Geometry',
-        id: '3',
-      }
-    ]
-  }
-];
 
 @Component({
   selector: 'app-consent-overview',
@@ -56,11 +11,23 @@ const SERVICES: Service[] = [
   styleUrls: ['./consent-overview.component.css']
 })
 export class ConsentOverviewComponent implements OnInit {
-  services = SERVICES;
+  services: Service[] | undefined;
 
-  constructor() { }
+  constructor(
+    private http: HttpClient,
+    private oauth: OAuthService
+  ) {
+  }
 
   ngOnInit(): void {
+    let claims = this.oauth.getIdentityClaims();
+    if (claims) {
+      // @ts-ignore
+      let email = claims['email'];
+      this.http.get<Service[]>(environment.urlConsentOverview + email).subscribe(data => {
+        this.services = data;
+      })
+    }
   }
 
 }

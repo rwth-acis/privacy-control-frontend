@@ -1,0 +1,7 @@
+version: "3.7"
+services:
+  angular-service:
+    container_name: pcs-front
+    image: pcs-front
+    ports:
+      - "4200:80"

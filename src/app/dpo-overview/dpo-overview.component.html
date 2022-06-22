@@ -1,0 +1,188 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/1999/html" style="display: none;">
+  <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path
+      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+  </symbol>
+  <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path
+      d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+  </symbol>
+  <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path
+      d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+  </symbol>
+</svg>
+
+<div class="container">
+  <div class="row">
+    <div class="col"></div>
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col"><h4>PCS Status:</h4></div>
+              <div class="col">
+                <div *ngIf="pcsStatus==2" class="alert alert-success d-flex align-items-center"
+                     role="alert">
+                  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+                    <use xlink:href="#check-circle-fill"/>
+                  </svg>
+                  <div>
+                    Initialised
+                  </div>
+                </div>
+                <ng-container *ngIf="pcsStatus==1">
+                  <a type="button" class="btn btn-outline-primary alert alert-primary d-flex align-items-center"
+                     (click)="onInit()">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+                      <use xlink:href="#info-fill"/>
+                    </svg>
+                    <div>
+                      Available
+                    </div>
+                  </a>
+                </ng-container>
+                <div *ngIf="pcsStatus==0" class="alert alert-danger d-flex align-items-center" role="alert">
+                  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+                    <use xlink:href="#exclamation-triangle-fill"/>
+                  </svg>
+                  <div>
+                    Offline
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col"></div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col">
+      <h2>Managers and Services</h2>
+    </div>
+    <div class="col">
+      <button type="button" class="btn btn-success btn-lg float-end" (click)="open(content)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+             class="bi bi-plus-circle-fill"
+             viewBox="0 0 16 16">
+          <path
+            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"></path>
+        </svg>
+        New Manager
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>#</th>
+          <th>Manager</th>
+          <th>Services</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <ng-container *ngIf="managers">
+          <ng-container *ngFor="let manager of managers; index as i">
+            <div *ngIf="manager.services.length > 0; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+              <tr *ngFor="let service of manager.services; index as g">
+                <td *ngIf="g==0" [attr.rowspan]="manager.services.length">
+                  {{i + 1}}
+                </td>
+                <td *ngIf="g==0" [attr.rowspan]="manager.services.length">
+                  {{manager.name}} <br>
+                  {{manager.email}}
+                </td>
+                <td>
+                  {{service.id}}
+                </td>
+                <td *ngIf="g==0" [attr.rowspan]="manager.services.length" class="align-middle text-center">
+                  <button class="btn btn-success" type="button" (click)="openService(serviceModal, manager.email)">
+                    Add Service
+                  </button>
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template #elseBlock>
+              <tr>
+                <td>{{i + 1}}</td>
+                <td>
+                  {{manager.name}} <br>
+                  {{manager.email}}
+                </td>
+                <td>N/A</td>
+                <td class="align-middle text-center">
+                  <button class="btn btn-success" type="button" (click)="openService(serviceModal, manager.email)">
+                    Add Service
+                  </button>
+                </td>
+              </tr>
+            </ng-template>
+          </ng-container>
+        </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      {{this.oauthService.getAccessToken()}}
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add New Manager</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+  </div>
+  <form [formGroup]="addManagerForm" (ngSubmit)="onAMFSubmit()">
+    <div class="modal-body">
+      <div class="mb-3">
+        <label for="name">Name (Optional):</label>
+        <input formControlName="name" class="form-control" id="name" type="text">
+      </div>
+      <div class="mb-3">
+        <label for="email">Email:</label>
+        <input formControlName="email" class="form-control" id="email" type="email">
+        <div *ngIf="amfSubmitted && amf['email'].errors" class="alert alert-danger">
+          <div *ngIf="amf['email'].errors['required']">Required</div>
+          <div *ngIf="amf['email'].errors['email']">Must be email form</div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary">Add</button>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #serviceModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title-service">Add New Service</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+  </div>
+  <div class="modal-body">
+    <div class="mb-3">
+      <label for="exampleDataList" class="form-label">Select or search from the list below:</label>
+      <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..."
+             (change)="changeServiceID($event)">
+      <datalist id="datalistOptions">
+        <option *ngFor="let service of addableServices" value="{{service}}">
+      </datalist>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="onAddServiceConfirm()">Add</button>
+  </div>
+</ng-template>

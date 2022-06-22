@@ -1,16 +1,30 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
-    <a href="#" class="navbar-brand">Privacy Control Service</a>
-    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+    <a class="navbar-brand" href="#">Privacy Control Service</a>
+    <button class="navbar-toggler" data-bs-target="#navbarCollapse" data-bs-toggle="collapse" type="button">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <div class="navbar-nav">
-        <a routerLink="/consent-overview" class="nav-item nav-link">Consent Overview</a>
-        <a href="#" class="nav-item nav-link">Collected Data</a>
+        <ng-container *ngIf="isStudent">
+          <a class="nav-item nav-link" routerLink="/consent">Consent Overview</a>
+        </ng-container>
+        <ng-container *ngIf="isManager">
+          <a class="nav-item nav-link" routerLink="/manager">Manager Overview</a>
+        </ng-container>
+        <ng-container *ngIf="isDPO">
+          <a class="nav-item nav-link" routerLink="/dpo">DPO Overview</a>
+          <a class="nav-item nav-link" routerLink="/purposes">Data Processing Purposes</a>
+        </ng-container>
       </div>
       <div class="navbar-nav ms-auto">
-        <a href="#" class="nav-item nav-link">Login</a>
+        <ng-container *ngIf="loggedIn">
+          <p class="nav-item nav-link">Welcome {{username}}!</p>
+        </ng-container>
+        <a type="button" class="nav-item nav-link" (click)="onLoginClick()">
+          <ng-container *ngIf="!loggedIn">Login</ng-container>
+          <ng-container *ngIf="loggedIn">Logout</ng-container>
+        </a>
       </div>
     </div>
   </div>
