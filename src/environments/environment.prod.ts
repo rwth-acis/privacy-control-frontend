@@ -1,4 +1,4 @@
-const ROOT_URL = "http://localhost:32009/pieces/";
+const ROOT_URL = "http://188.2.60.109:32009/pieces/";
 
 export const environment = {
   production: true,
