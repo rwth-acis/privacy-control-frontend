@@ -23,7 +23,7 @@ export class OidcInterceptor implements HttpInterceptor {
       return EMPTY;
     }
     let header = 'Bearer ' + token;
-    let headers = request.headers.set('access-token', header);
+    let headers = request.headers.set('auth_token', header);
 
     request = request.clone({headers});
     return next.handle(request);
