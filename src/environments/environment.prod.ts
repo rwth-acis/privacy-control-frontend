@@ -1,4 +1,4 @@
-const ROOT_URL = "http://188.2.60.109:32009/pieces/";
+const ROOT_URL = "https://las2peer.tech4comp.dbis.rwth-aachen.de/pieces/";
 
 export const environment = {
   production: true,
